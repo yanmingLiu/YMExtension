@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'YMExtension_Example' do
+  pod 'YMExtension', :path => '../'
+
+  target 'YMExtension_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
