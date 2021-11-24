@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'YMExtension'
   s.version          = '0.1.0'
-  s.summary          = 'YMExtension of Swift'
+  s.summary          = 'YMExtension'
 
   s.description      = 'Swift extensions'
 
