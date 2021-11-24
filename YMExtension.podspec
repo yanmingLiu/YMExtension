@@ -13,11 +13,11 @@ Pod::Spec.new do |s|
 
   s.description      = 'Swift extensions'
 
-  s.homepage         = 'https://github.com/lym/YMExtension'
+  s.homepage         = 'https://github.com/yanmingLiu/YMExtension'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lym' => 'lwb374402328@gmail.com' }
-  s.source           = { :git => 'https://github.com/lym/YMExtension.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/yanmingLiu/YMExtension.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
