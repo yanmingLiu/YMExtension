@@ -20,6 +20,30 @@ it, simply add the following line to your Podfile:
 pod 'YMExtension'
 ```
 
+```swift
+public struct ExtWrapper<Base> {
+    public let base: Base
+    init(_ base: Base) {
+        self.base = base
+    }
+}
+
+public protocol ExtCompatible: Any { }
+
+public extension ExtCompatible {
+    static var ext: ExtWrapper<Self>.Type {
+        get{ ExtWrapper<Self>.self }
+        set {}
+    }
+    
+    var ext: ExtWrapper<Self> {
+        get { return ExtWrapper<Self>(self) }
+        set { }
+    }
+}
+
+```
+
 ## Author
 
 lym, lwb374402328@gmail.com

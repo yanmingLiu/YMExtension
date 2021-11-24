@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import YMExtension
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        view.backgroundColor = UIColor.ext.random;
+        
+        print(Bundle.ext.appBundleName)
+        print(Bundle.ext.appVersion)
+        print(UIWindow.ext.safeAreaInsets)
+        print(UIWindow.ext.statusBarFrame)
     }
 
     override func didReceiveMemoryWarning() {

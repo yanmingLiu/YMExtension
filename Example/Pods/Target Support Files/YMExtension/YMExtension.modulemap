@@ -1,0 +1,6 @@
+framework module YMExtension {
+  umbrella header "YMExtension-umbrella.h"
+
+  export *
+  module * { export * }
+}
