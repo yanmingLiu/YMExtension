@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YMExtension'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'YMExtension'
   s.description      = 'Swift extensions'
   s.homepage         = 'https://github.com/yanmingLiu/YMExtension'
@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.swift_version = '5.0'
   s.requires_arc = true
-  s.source_files  = "Sources/**/*"
+  s.source_files  = "Sources", "Sources/*.{swift}"
   
 end

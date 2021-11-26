@@ -19,13 +19,6 @@ public extension ExtWrapper where Base == String {
         return base.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    /// 是否不为空
-    /// "", "  ", "\n", "  \n   "都视为空
-    /// 不为空返回true， 为空返回false
-    var isNotBlank: Bool {
-        return !trimmed.isEmpty
-    }
-
     /// 字符串的全部范围
     var rangeOfAll: NSRange {
         return NSRange(location: 0, length: base.count)
@@ -41,12 +34,6 @@ public extension ExtWrapper where Base == String {
     /// 判断是否包含某个子串
     func contains(_ find: String) -> Bool {
         return base.range(of: find) != nil
-    }
-    
-    // String[1]
-    subscript(index: Int) -> Character? {
-        guard !base.isEmpty, let stringIndex = base.index(base.startIndex, offsetBy: index, limitedBy: base.index(before: base.endIndex)) else { return nil }
-        return base[stringIndex]
     }
 }
 
