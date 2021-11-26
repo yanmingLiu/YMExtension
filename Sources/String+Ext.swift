@@ -69,9 +69,9 @@ public extension ExtWrapper where Base == String {
 
     /// JSON 字符串 转换为 字典
     func toDictionary() -> [String: Any]? {
-        let jsonString = base
-        let jsonData = jsonString.data(using: .utf8)!
-        guard let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) else {
+        guard let jsonData = base.data(using: .utf8),
+              let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        else {
             return nil
         }
         return (dict as! [String: Any])
@@ -79,13 +79,12 @@ public extension ExtWrapper where Base == String {
 
     /// JSON 字符串 转换为  Array
     func jsonStringToArray() -> [Any]? {
-        let jsonString = base
-        let jsonData: Data = jsonString.data(using: .utf8)!
-        let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
-        if array != nil {
-            return (array as! [Any])
+        guard let jsonData: Data = base.data(using: .utf8),
+              let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        else {
+            return nil
         }
-        return nil
+        return (array as! [Any]) 
     }
 
     /// 转成拼音

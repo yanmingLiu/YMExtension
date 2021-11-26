@@ -16,11 +16,9 @@ class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-
     }
 
     override func viewDidLoad() {
@@ -28,7 +26,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         title = "Demo"
 
-        
         view.addSubview(tableView)
         tableView.frame = CGRect(x: 0, y: UIWindow.ext.navBarSafeAreaHeight, width: view.bounds.width, height: view.bounds.height - UIWindow.ext.navBarSafeAreaHeight - UIWindow.ext.tabBarSafeAreaHeight)
 
@@ -44,6 +41,10 @@ class ViewController: UIViewController {
         print("tabBar.frame:\(UIWindow.ext.tabBarFrame)")
         print("tabBarHeight:\(UIWindow.ext.tabBarHeight)")
         print("tabBarSafeAreaHeight:\(UIWindow.ext.tabBarSafeAreaHeight)")
+        
+        let json = "{\"greeting\": \"Welcome to quicktype!\"}"
+        let dic = json.ext.toDictionary()
+        print(dic as! [String: String])
     }
 
     private func tableHeaderViewLayout() {
@@ -65,10 +66,8 @@ class ViewController: UIViewController {
         // 动态高度
         tableView.ext.setTableHeaderView(headerView: view)
     }
-    
-    @IBAction func jump(_ sender: Any) {
 
-    }
+    @IBAction func jump(_: Any) {}
 }
 
 extension ViewController: UITableViewDataSource {
