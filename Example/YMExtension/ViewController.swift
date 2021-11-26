@@ -9,24 +9,50 @@
 import UIKit
 import YMExtension
 
-class ViewController: UIViewController {
+extension UITabBarController{
+    
+    func getHeight()->CGFloat{
+        return self.tabBar.frame.size.height
+    }
+    
+    func getWidth()->CGFloat{
+        return self.tabBar.frame.size.width
+    }
+}
 
+class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        view.backgroundColor = UIColor.ext.random;
-        
         print(Bundle.ext.appBundleName)
         print(Bundle.ext.appVersion)
-        print(UIWindow.ext.safeAreaInsets)
-        print(UIWindow.ext.statusBarFrame)
+        print("window: \(UIWindow.ext.key)")
+        print("safeAreaInsets:\(UIWindow.ext.safeAreaInsets)")
+        print("statusBarHeight: \(UIWindow.ext.statusBarHeight)")
+        print("navBarSafeAreaHeight: \(UIWindow.ext.navBarSafeAreaHeight)")
+        
+        print("tabBar.frame:\(UIWindow.ext.tabBarFrame)")
+        print("tabBarHeight:\(UIWindow.ext.tabBarHeight)")
+        print("tabBarSafeAreaHeight:\(UIWindow.ext.tabBarSafeAreaHeight)")
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if #available(iOS 11.0, *) {
+            print("view.safeAreaInsets:\(self.view.safeAreaInsets)")
+        } else {
+            // Fallback on earlier versions
+        }
+        print("view.frame:\(self.view.frame)")
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 

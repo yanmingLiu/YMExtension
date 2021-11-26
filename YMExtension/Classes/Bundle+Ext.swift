@@ -20,7 +20,7 @@ public extension ExtWrapper where Base: Bundle {
     static var appDisplayName: String {
         return (Bundle.main.infoDictionary!["CFBundleDisplayName"] as? String) ?? ""
     }
-    
+
     /// 应用名称
     static var appBundleName: String {
         return (Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String) ?? ""

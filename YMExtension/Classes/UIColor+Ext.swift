@@ -88,7 +88,7 @@ public extension ExtWrapper where Base: UIColor {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(self.base.cgColor)
+        context.setFillColor(base.cgColor)
         context.fill(rect)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
             return nil

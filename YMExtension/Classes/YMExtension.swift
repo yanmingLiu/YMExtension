@@ -14,18 +14,16 @@ public struct ExtWrapper<Base> {
     }
 }
 
-public protocol ExtCompatible: Any { }
+public protocol ExtCompatible: Any {}
 
 public extension ExtCompatible {
     static var ext: ExtWrapper<Self>.Type {
-        get{ ExtWrapper<Self>.self }
+        get { ExtWrapper<Self>.self }
         set {}
     }
-    
+
     var ext: ExtWrapper<Self> {
         get { return ExtWrapper<Self>(self) }
-        set { }
+        set {}
     }
 }
-
-
