@@ -20,7 +20,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="O2z-6t-Ine"/>
+                    <navigationItem key="navigationItem" id="O2z-6t-Ine">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="redo" id="iRl-q9-Tgf">
+                            <connections>
+                                <action selector="jump:" destination="vXZ-lx-hvc" id="E0V-vA-ajh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
