@@ -85,7 +85,9 @@ public extension ExtWrapper where Base: UIWindow {
     }
 }
 
-public extension UIScreen {
+extension UIScreen: ExtCompatible {}
+
+public extension ExtWrapper where Base: UIScreen {
     static var width: CGFloat {
         return UIScreen.main.bounds.size.width
     }
@@ -95,7 +97,9 @@ public extension UIScreen {
     }
 }
 
-public extension UIDevice {
+extension UIDevice: ExtCompatible {}
+
+public extension ExtWrapper where Base: UIDevice {
     static var isIphoneX: Bool {
         if UIDevice.current.userInterfaceIdiom != .phone {
             return true
