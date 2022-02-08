@@ -14,6 +14,12 @@ extension String: ExtCompatible {}
 // MARK: - get
 
 public extension ExtWrapper where Base == String {
+    /// 随机字符串
+    static func randomString(_ length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0 ..< length).map { _ in letters.randomElement()! })
+    }
+
     /// 去掉字符串首尾的空格换行，中间的空格和换行忽略
     var trimmed: String {
         return base.trimmingCharacters(in: .whitespacesAndNewlines)

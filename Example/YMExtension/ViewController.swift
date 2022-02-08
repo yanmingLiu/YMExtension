@@ -16,6 +16,8 @@ class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
+    
+    var headerView: UIView!
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -31,11 +33,13 @@ class ViewController: UIViewController {
 
         tableHeaderViewLayout()
 
-        print(Bundle.ext.appBundleName)
-        print(Bundle.ext.appVersion)
-        print("window: \(UIWindow.ext.key)")
+        print("appBundleName: \(Bundle.ext.appBundleName)")
+        print("appVersion:\(Bundle.ext.appVersion)")
+        print("window: \(String(describing: UIWindow.ext.key))")
+        
         print("safeAreaInsets:\(UIWindow.ext.safeAreaInsets)")
         print("statusBarHeight: \(UIWindow.ext.statusBarHeight)")
+        print("navBarHeight: \(UIWindow.ext.navBarHeight)")
         print("navBarSafeAreaHeight: \(UIWindow.ext.navBarSafeAreaHeight)")
 
         print("tabBar.frame:\(UIWindow.ext.tabBarFrame)")
@@ -45,6 +49,12 @@ class ViewController: UIViewController {
         let json = "{\"greeting\": \"Welcome to quicktype!\"}"
         let dic = json.ext.toDictionary()
         print(dic as! [String: String])
+        
+        print("随机6位数的字符串:\(String.ext.randomString(6))")
+        
+        let point = headerView.ext.convertRect(rect: headerView.bounds, toViewOrWindow: UIWindow.ext.key)
+        print("headerView的frame:\(headerView.frame)")
+        print("headerView的坐标转到window:\(point)")
     }
 
     private func tableHeaderViewLayout() {
@@ -65,6 +75,8 @@ class ViewController: UIViewController {
 
         // 动态高度
         tableView.ext.setTableHeaderView(headerView: view)
+        
+        headerView = view
     }
 
     @IBAction func jump(_: Any) {}
@@ -77,7 +89,7 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath.section - indexPath.row)"
+        cell.textLabel?.text = "\(indexPath.row)"
         return cell
     }
 }
