@@ -8,8 +8,6 @@
 
 import UIKit
 
-extension UITableView: ExtCompatible {}
-
 public extension ExtWrapper where Base: UITableView {
     /// Set table header view & add Auto layout.
     func setTableHeaderView(headerView: UIView) {

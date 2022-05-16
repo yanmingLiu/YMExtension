@@ -7,8 +7,6 @@
 //
 import UIKit
 
-extension UIWindow: ExtCompatible {}
-
 public extension ExtWrapper where Base: UIWindow {
     static var key: UIWindow? {
         if #available(iOS 13, *) {

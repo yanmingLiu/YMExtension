@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
-    
+
     var headerView: UIView!
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         print("appBundleName: \(Bundle.ext.appBundleName)")
         print("appVersion:\(Bundle.ext.appVersion)")
         print("window: \(String(describing: UIWindow.ext.key))")
-        
+
         print("safeAreaInsets:\(UIWindow.ext.safeAreaInsets)")
         print("statusBarHeight: \(UIWindow.ext.statusBarHeight)")
         print("navBarHeight: \(UIWindow.ext.navBarHeight)")
@@ -45,13 +45,13 @@ class ViewController: UIViewController {
         print("tabBar.frame:\(UIWindow.ext.tabBarFrame)")
         print("tabBarHeight:\(UIWindow.ext.tabBarHeight)")
         print("tabBarSafeAreaHeight:\(UIWindow.ext.tabBarSafeAreaHeight)")
-        
+
         let json = "{\"greeting\": \"Welcome to quicktype!\"}"
         let dic = json.ext.toDictionary()
         print(dic as! [String: String])
-        
+
         print("随机6位数的字符串:\(String.ext.randomString(6))")
-        
+
         let point = headerView.ext.convertRect(rect: headerView.bounds, toViewOrWindow: UIWindow.ext.key)
         print("headerView的frame:\(headerView.frame)")
         print("headerView的坐标转到window:\(point)")
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.preferredMaxLayoutWidth = UIScreen.ext.width - 40
-        label.text = "iOS is the world’s most advanced mobile operating system. With iOS 15, you can build apps that connect people in new ways with SharePlay, help them focus on the moment with new notification APIs, and provide new tools for exploring with augmented reality, Safari extensions, and nearby interactions. You can even improve the discovery of your app on the App Store, provide better in-app purchase experiences, and more with the latest capabilities for apps on the App Store."
+        label.text = "TableHeaderViewLayout自动高度\n\n iOS is the world’s most advanced mobile operating system. With iOS 15, you can build apps that connect people in new ways with SharePlay, help them focus on the moment with new notification APIs, and provide new tools for exploring with augmented reality, Safari extensions, and nearby interactions. You can even improve the discovery of your app on the App Store, provide better in-app purchase experiences, and more with the latest capabilities for apps on the App Store."
 
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,11 +75,34 @@ class ViewController: UIViewController {
 
         // 动态高度
         tableView.ext.setTableHeaderView(headerView: view)
-        
+
         headerView = view
     }
 
-    @IBAction func jump(_: Any) {}
+    private func extText() -> String? {
+        """
+        常用扩展：
+        Bundle.ext.appBundleName = \(Bundle.ext.appBundleName)
+        Bundle.ext.appVersion = \(Bundle.ext.appVersion)
+        
+        UIWindow.ext.key = \(String(describing: UIWindow.ext.key))
+        UIWindow.ext.safeAreaInsets = \(UIWindow.ext.safeAreaInsets)
+        UIWindow.ext.statusBarHeight = \(UIWindow.ext.statusBarHeight)
+        UIWindow.ext.navBarHeight = \(UIWindow.ext.navBarHeight)
+        UIWindow.ext.navBarSafeAreaHeight = \(UIWindow.ext.navBarSafeAreaHeight)
+        
+        UIWindow.ext.tabBarFrame = \(UIWindow.ext.tabBarFrame)
+        UIWindow.ext.tabBarHeight = \(UIWindow.ext.tabBarHeight)
+        UIWindow.ext.tabBarSafeAreaHeight = \(UIWindow.ext.tabBarSafeAreaHeight)
+        
+        随机6位数的字符串String.ext.randomString(6)) = \(String.ext.randomString(6)))
+        
+        headerView的frame = \(headerView.frame)
+        headerView的坐标转到window headerView.ext.convertRect(rect: headerView.bounds, toViewOrWindow: UIWindow.ext.key)
+        = \(headerView.ext.convertRect(rect: headerView.bounds, toViewOrWindow: UIWindow.ext.key)
+        )
+        """
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -90,6 +113,11 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.numberOfLines = 0
+
+        if indexPath.row == 0 {
+            cell.textLabel?.text = extText()
+        }
         return cell
     }
 }
