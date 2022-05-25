@@ -17,7 +17,7 @@ class UIListController: UIViewController {
         btn.layer.cornerRadius = 20
         btn.clipsToBounds = true
         view.addSubview(btn)
-        
+
         let colors = [UIColor.ext.hexString("#8E28FF").cgColor,
                       UIColor.ext.hexString("#3F03FF").cgColor]
         let image = UIImage.ext.gradientColorImage(bounds: btn.bounds, colors: colors)

@@ -13,10 +13,10 @@ extension UIColor: ExtCompatible {}
 public extension ExtWrapper where Base: UIColor {
     /// 随机颜色
     static var random: UIColor {
-        return UIColor(red: CGFloat(arc4random() % 256) / 255.0,
-                       green: CGFloat(arc4random() % 256) / 255.0,
-                       blue: CGFloat(arc4random() % 256) / 255.0,
-                       alpha: 0.5)
+        let red = CGFloat(Float.random(in: 0 ..< 255.0) / 255.0)
+        let green = CGFloat(Float.random(in: 0 ..< 255.0) / 255.0)
+        let blue = CGFloat(Float.random(in: 0 ..< 255.0) / 255.0)
+        return UIColor(red: red, green: green, blue: blue, alpha: 0.5)
     }
 
     /// 根据16进制颜色值返回颜色
@@ -80,20 +80,5 @@ public extension ExtWrapper where Base: UIColor {
         let g = CGFloat((hex & 0xFF00) >> 8) / 255
         let b = CGFloat(hex & 0xFF) / 255
         return UIColor(red: r, green: g, blue: b, alpha: alpha)
-    }
-
-    /// 颜色 --> 图片
-    /// - Returns: UIImage?
-    func toImage() -> UIImage? {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(base.cgColor)
-        context.fill(rect)
-        guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
-            return nil
-        }
-        UIGraphicsEndImageContext()
-        return image
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "YMExtension",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "summary": "YMExtension",
   "description": "Swift extensions",
   "homepage": "https://github.com/yanmingLiu/YMExtension",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/yanmingLiu/YMExtension.git",
-    "tag": "0.1.6"
+    "tag": "0.1.7"
   },
   "platforms": {
     "ios": "9.0"

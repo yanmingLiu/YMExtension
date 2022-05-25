@@ -80,7 +80,7 @@ public extension ExtWrapper where Base == String {
         else {
             return nil
         }
-        return (dict as! [String: Any])
+        return dict as? [String: Any]
     }
 
     /// JSON 字符串 转换为  Array
@@ -90,7 +90,7 @@ public extension ExtWrapper where Base == String {
         else {
             return nil
         }
-        return (array as! [Any]) 
+        return array as? [Any]
     }
 
     /// 转成拼音

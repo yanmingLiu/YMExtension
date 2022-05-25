@@ -1,5 +1,5 @@
 PODS:
-  - YMExtension (0.1.6)
+  - YMExtension (0.1.7)
 
 DEPENDENCIES:
   - YMExtension (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  YMExtension: e6ff720a0eda61468c84f06000ca87d7c9c4ea9c
+  YMExtension: 1aba541e3ae0d41fd796b90ce1803b88ee548453
 
 PODFILE CHECKSUM: 2fe07a274a70e726dbafa64e84faa41b2097c30e
 

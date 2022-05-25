@@ -10,12 +10,30 @@ import UIKit
 extension UIImage: ExtCompatible {}
 
 public extension ExtWrapper where Base: UIImage {
+    /// 根据颜色生成图片
+    func withColor(_ color: UIColor) -> UIImage? {
+        let size = CGSize(width: 1, height: 1)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        defer { UIGraphicsEndImageContext() }
+        guard let maskImage = base.cgImage, let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        let bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        context.translateBy(x: 0, y: size.height)
+        context.scaleBy(x: 1, y: -1)
+        context.setBlendMode(.colorBurn)
+        context.clip(to: bounds, mask: maskImage)
+        context.setFillColor(color.cgColor)
+        context.fill(bounds)
+        return UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(.alwaysOriginal)
+    }
+
     /// 根据渐变颜色生成渐变图片
     static func gradientColorImage(bounds: CGRect,
                                    colors: [CGColor],
                                    startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
                                    endPoint: CGPoint = CGPoint(x: 1.0, y: 0.5),
-                                   locations: [NSNumber]? = [0, 1]) -> UIImage?
+                                   locations _: [NSNumber]? = [0, 1]) -> UIImage?
     {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
