@@ -36,6 +36,16 @@ class ViewController: UIViewController {
             height: view.bounds.height - UIWindow.ext.navBarSafeAreaHeight - UIWindow.ext.tabBarSafeAreaHeight)
 
         tableHeaderViewLayout()
+
+        let url = URL(string: "https://google.com?")!
+        let param = ["lang": "en"]
+        let res1 = url.ext.appendingQueryParameters(param)
+        let res2 = res1.ext.appendingQueryParameters(["lang": "id"])
+        print(res1)
+        print(res2)
+
+        let param2 = res2.ext.queryParameters
+        print(param2)
     }
 
     private func tableHeaderViewLayout() {

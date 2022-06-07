@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3828A2C927B26348001020AB /* UIListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828A2C827B26348001020AB /* UIListController.swift */; };
+		385917AB284F591200DE90FF /* URLExtTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385917AA284F591200DE90FF /* URLExtTest.swift */; };
 		3870ECEC2848C0ED0022E5A3 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870ECEB2848C0ED0022E5A3 /* TableController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		0739611106A5451B3EAC17F2 /* Pods-YMExtension_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YMExtension_Tests.debug.xcconfig"; path = "Target Support Files/Pods-YMExtension_Tests/Pods-YMExtension_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		380714D7283E305E00318DA3 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		3828A2C827B26348001020AB /* UIListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIListController.swift; sourceTree = "<group>"; };
+		385917AA284F591200DE90FF /* URLExtTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtTest.swift; sourceTree = "<group>"; };
 		3870ECEB2848C0ED0022E5A3 /* TableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		46BD0CC3F0102808B5A4C487 /* Pods-YMExtension_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YMExtension_Tests.release.xcconfig"; path = "Target Support Files/Pods-YMExtension_Tests/Pods-YMExtension_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* YMExtension_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YMExtension_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				385917AA284F591200DE90FF /* URLExtTest.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				385917AB284F591200DE90FF /* URLExtTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
