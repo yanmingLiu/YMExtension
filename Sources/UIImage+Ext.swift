@@ -10,34 +10,17 @@ import UIKit
 extension UIImage: ExtCompatible {}
 
 public extension ExtWrapper where Base: UIImage {
-    /// 根据颜色生成图片
-    func withColor(_ color: UIColor) -> UIImage? {
-        let size = CGSize(width: 1, height: 1)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        defer { UIGraphicsEndImageContext() }
-        guard let maskImage = base.cgImage, let context = UIGraphicsGetCurrentContext() else {
-            return nil
-        }
-        let bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        context.translateBy(x: 0, y: size.height)
-        context.scaleBy(x: 1, y: -1)
-        context.setBlendMode(.colorBurn)
-        context.clip(to: bounds, mask: maskImage)
-        context.setFillColor(color.cgColor)
-        context.fill(bounds)
-        return UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(.alwaysOriginal)
-    }
-
     /// 根据渐变颜色生成渐变图片
-    static func gradientColorImage(bounds: CGRect,
-                                   colors: [CGColor],
-                                   startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
-                                   endPoint: CGPoint = CGPoint(x: 1.0, y: 0.5),
-                                   locations _: [NSNumber]? = [0, 1]) -> UIImage?
-    {
+    static func gradientColorImage(
+        bounds: CGRect,
+        colors: [UIColor],
+        startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
+        endPoint: CGPoint = CGPoint(x: 1.0, y: 0.5),
+        locations _: [NSNumber]? = [0, 1]
+    ) -> UIImage? {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
-        gradientLayer.colors = colors
+        gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
         gradientLayer.locations = [0, 1]
@@ -48,8 +31,27 @@ public extension ExtWrapper where Base: UIImage {
         return image
     }
 
+    /// 根据颜色生成图片
+    static func color(color: UIColor, size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
+
+        defer {
+            UIGraphicsEndImageContext()
+        }
+
+        color.setFill()
+        UIRectFill(CGRect(origin: .zero, size: size))
+
+        guard let aCgImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
+            return nil
+        }
+        return UIImage(cgImage: aCgImage)
+    }
+}
+
+public extension ExtWrapper where Base: UIImage {
     /// 图片压缩
-    func compress(toByte maxLength: Int) -> UIImage {
+    func compressed(toByte maxLength: Int) -> UIImage {
         var compression: CGFloat = 1
         guard var data = base.jpegData(compressionQuality: compression),
               data.count > maxLength else { return base }
@@ -90,5 +92,95 @@ public extension ExtWrapper where Base: UIImage {
         }
         print("压缩（by size）后2：\(data.count / 1024) KB")
         return resultImage
+    }
+
+    /// SwifterSwift: Compressed UIImage from original UIImage.
+    ///
+    /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).
+    /// - Returns: optional UIImage (if applicable).
+    func compressed(quality: CGFloat = 0.5) -> UIImage? {
+        guard let data = base.jpegData(compressionQuality: quality) else { return nil }
+        return UIImage(data: data)
+    }
+
+    /// SwifterSwift: Compressed UIImage data from original UIImage.
+    ///
+    /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).
+    /// - Returns: optional Data (if applicable).
+    func compressedData(quality: CGFloat = 0.5) -> Data? {
+        return base.jpegData(compressionQuality: quality)
+    }
+
+    /// SwifterSwift: UIImage Cropped to CGRect.
+    ///
+    /// - Parameter rect: CGRect to crop UIImage to.
+    /// - Returns: cropped UIImage
+    func cropped(to rect: CGRect) -> UIImage {
+        guard rect.size.width <= base.size.width, rect.size.height <= base.size.height else { return base }
+        let scaledRect = rect.applying(CGAffineTransform(scaleX: base.scale, y: base.scale))
+        guard let image = base.cgImage?.cropping(to: scaledRect) else { return base }
+        return UIImage(cgImage: image, scale: base.scale, orientation: base.imageOrientation)
+    }
+
+    /// SwifterSwift: UIImage scaled to height with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toHeight: new height.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: optional scaled UIImage (if applicable).
+    func scaled(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
+        let scale = toHeight / base.size.height
+        let newWidth = base.size.width * scale
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: toHeight), opaque, base.scale)
+        base.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: toHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
+    /// SwifterSwift: UIImage scaled to width with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toWidth: new width.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: optional scaled UIImage (if applicable).
+    func scaled(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
+        let scale = toWidth / base.size.width
+        let newHeight = base.size.height * scale
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: toWidth, height: newHeight), opaque, base.scale)
+        base.draw(in: CGRect(x: 0, y: 0, width: toWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
+    /// SwifterSwift: Creates a copy of the receiver rotated by the given angle (in radians).
+    ///
+    ///     // Rotate the image by 180°
+    ///     image.rotated(by: .pi)
+    ///
+    /// - Parameter radians: The angle, in radians, by which to rotate the image.
+    /// - Returns: A new image rotated by the given angle.
+    func rotated(by radians: CGFloat) -> UIImage? {
+        let destRect = CGRect(origin: .zero, size: base.size)
+            .applying(CGAffineTransform(rotationAngle: radians))
+        let roundedDestRect = CGRect(x: destRect.origin.x.rounded(),
+                                     y: destRect.origin.y.rounded(),
+                                     width: destRect.width.rounded(),
+                                     height: destRect.height.rounded())
+
+        UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
+        guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
+
+        contextRef.translateBy(x: roundedDestRect.width / 2, y: roundedDestRect.height / 2)
+        contextRef.rotate(by: radians)
+
+        base.draw(in: CGRect(origin: CGPoint(x: -base.size.width / 2,
+                                             y: -base.size.height / 2),
+                             size: base.size))
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }

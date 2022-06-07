@@ -15,7 +15,7 @@ public func adaptWidth(designWidth: CGFloat = 375.0, _ vale: CGFloat) -> CGFloat
     return UIScreen.main.bounds.size.width / designWidth * vale
 }
 
-public extension ExtWrapper where Base == UIView {
+public extension ExtWrapper where Base: UIView {
     /// 返回视图的控制器对象
     func viewController() -> UIViewController? {
         var view: UIView? = base
@@ -50,7 +50,7 @@ public extension ExtWrapper where Base == UIView {
     func addGradientColor(startPoint: CGPoint,
                           endPoint: CGPoint,
                           locs: [NSNumber] = [0, 1],
-                          colors: [Any],
+                          colors: [UIColor],
                           cornerRadius: CGFloat = 0) -> CAGradientLayer?
     {
         guard startPoint.x >= 0,
@@ -65,13 +65,12 @@ public extension ExtWrapper where Base == UIView {
             return nil
         }
         base.layoutIfNeeded()
-        var gradientLayer: CAGradientLayer!
         removeGradientLayer()
-        gradientLayer = CAGradientLayer()
+        let gradientLayer = CAGradientLayer()
         gradientLayer.frame = base.layer.bounds
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
-        gradientLayer.colors = colors
+        gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.cornerRadius = base.layer.cornerRadius
         gradientLayer.masksToBounds = true
         gradientLayer.locations = locs
@@ -87,18 +86,14 @@ public extension ExtWrapper where Base == UIView {
         // 渐变图层插入到最底层，避免在uibutton上遮盖文字图片
         base.layer.insertSublayer(gradientLayer, at: 0)
         base.backgroundColor = UIColor.clear
-        // self如果是UILabel，masksToBounds设为true会导致文字消失
-        // layer.masksToBounds = false
         return gradientLayer
     }
 
     /// 移除渐变layer
     func removeGradientLayer() {
-        if let sublayers = base.layer.sublayers {
-            for layer in sublayers {
-                if layer.isKind(of: CAGradientLayer.self) {
-                    layer.removeFromSuperlayer()
-                }
+        base.layer.sublayers?.forEach {
+            if $0.isKind(of: CAGradientLayer.self) {
+                $0.removeFromSuperlayer()
             }
         }
     }

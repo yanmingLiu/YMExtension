@@ -15,7 +15,8 @@ extension String: ExtCompatible {}
 
 public extension ExtWrapper where Base == String {
     /// 随机字符串
-    static func randomString(_ length: Int) -> String {
+    static func random(ofLength length: Int) -> String {
+        guard length > 0 else { return "" }
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0 ..< length).map { _ in letters.randomElement()! })
     }
@@ -128,9 +129,7 @@ public extension ExtWrapper where Base == String {
         guard let pattern = try? NSRegularExpression(pattern: regex, options: options) else {
             return false
         }
-        return pattern.numberOfMatches(in: base,
-                                       options: [],
-                                       range: rangeOfAll) > 0
+        return pattern.numberOfMatches(in: base, options: [], range: rangeOfAll) > 0
     }
 
     /// 枚举所有正则表达式匹配项
@@ -161,9 +160,6 @@ public extension ExtWrapper where Base == String {
         guard let pattern = try? NSRegularExpression(pattern: regex, options: options) else {
             return nil
         }
-        return pattern.stringByReplacingMatches(in: base,
-                                                options: [],
-                                                range: rangeOfAll,
-                                                withTemplate: with)
+        return pattern.stringByReplacingMatches(in: base, options: [], range: rangeOfAll, withTemplate: with)
     }
 }

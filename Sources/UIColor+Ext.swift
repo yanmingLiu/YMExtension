@@ -24,14 +24,14 @@ public extension ExtWrapper where Base: UIColor {
     ///   - hexString: 颜色值字符串: 前缀 ‘#’ 和 ‘0x’ 不是必须的
     ///   - alpha: 透明度，默认为1
     /// - Returns: UIColor
-    static func hexString(_ hexString: String, alpha: CGFloat = 1) -> UIColor {
+    static func hex(_ hex: String, alpha: CGFloat = 1) -> UIColor {
         var str = ""
-        if hexString.lowercased().hasPrefix("0x") {
-            str = hexString.replacingOccurrences(of: "0x", with: "")
-        } else if hexString.lowercased().hasPrefix("#") {
-            str = hexString.replacingOccurrences(of: "#", with: "")
+        if hex.lowercased().hasPrefix("0x") {
+            str = hex.replacingOccurrences(of: "0x", with: "")
+        } else if hex.lowercased().hasPrefix("#") {
+            str = hex.replacingOccurrences(of: "#", with: "")
         } else {
-            str = hexString
+            str = hex
         }
 
         let length = str.count

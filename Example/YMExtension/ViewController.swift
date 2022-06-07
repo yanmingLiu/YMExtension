@@ -36,25 +36,6 @@ class ViewController: UIViewController {
             height: view.bounds.height - UIWindow.ext.navBarSafeAreaHeight - UIWindow.ext.tabBarSafeAreaHeight)
 
         tableHeaderViewLayout()
-
-        print("appBundleName: \(Bundle.ext.appBundleName)")
-        print("appVersion:\(Bundle.ext.appVersion)")
-        print("window: \(String(describing: UIWindow.ext.key))")
-
-        print("safeAreaInsets:\(UIWindow.ext.safeAreaInsets)")
-        print("statusBarHeight: \(UIWindow.ext.statusBarHeight)")
-        print("navBarHeight: \(UIWindow.ext.navBarHeight)")
-        print("navBarSafeAreaHeight: \(UIWindow.ext.navBarSafeAreaHeight)")
-
-        print("tabBar.frame:\(UIWindow.ext.tabBarFrame)")
-        print("tabBarHeight:\(UIWindow.ext.tabBarHeight)")
-        print("tabBarSafeAreaHeight:\(UIWindow.ext.tabBarSafeAreaHeight)")
-
-        let json = "{\"greeting\": \"Welcome to quicktype!\"}"
-        let dic = json.ext.toDictionary()
-        print(dic as? [String: String] ?? "")
-
-        print("随机6位数的字符串:\(String.ext.randomString(6))")
     }
 
     private func tableHeaderViewLayout() {
@@ -106,7 +87,7 @@ class ViewController: UIViewController {
         UIWindow.ext.tabBarHeight = \(UIWindow.ext.tabBarHeight)
         UIWindow.ext.tabBarSafeAreaHeight = \(UIWindow.ext.tabBarSafeAreaHeight)
 
-        随机6位数的字符串String.ext.randomString(6)) = \(String.ext.randomString(6)))
+        随机6位数的字符串String.ext.randomString(6)) = \(String.ext.random(ofLength: 6)))
         """
     }
 }
