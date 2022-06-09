@@ -9,6 +9,8 @@
 import UIKit
 import YMExtension
 
+let NotificationName = NSNotification.Name("1")
+
 class UIListController: UITableViewController {
     let datas = ["渐变色按钮"]
     let vcs: [UIViewController] = [TableController()]
@@ -36,5 +38,8 @@ class UIListController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(vcs[indexPath.row], animated: true)
+        if indexPath.row == 0 {
+            NotificationCenter.default.post(name: NotificationName, object: ["1","2","3"], userInfo: ["k": "v"])
+        }
     }
 }

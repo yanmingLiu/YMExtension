@@ -13,8 +13,15 @@
 		26FD3783587C3319410A07B889238154 /* Pods-YMExtension_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2603F47932C5A32F2EE588FC68C4A3CE /* Pods-YMExtension_Tests-dummy.m */; };
 		37AF1B8DC78178B80DA4F84470330BB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		385917A1284F2FFE00DE90FF /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385917A0284F2FFE00DE90FF /* UICollectionView+Ext.swift */; };
-		385917A5284F33CB00DE90FF /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385917A4284F33CB00DE90FF /* UITextView+Ext.swift */; };
-		385917A7284F4F6700DE90FF /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385917A6284F4F6700DE90FF /* URL+Ext.swift */; };
+		38591887285045FC00DE90FF /* URLRequest+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38591886285045FC00DE90FF /* URLRequest+Ext.swift */; };
+		385918A428518EE400DE90FF /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3859189C28518EE300DE90FF /* DispatchQueue+Ext.swift */; };
+		385918A528518EE400DE90FF /* NotificationCenter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3859189D28518EE300DE90FF /* NotificationCenter+Ext.swift */; };
+		385918A628518EE400DE90FF /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3859189E28518EE400DE90FF /* UserDefaults+Ext.swift */; };
+		385918A728518EE400DE90FF /* Dictionary+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3859189F28518EE400DE90FF /* Dictionary+Ext.swift */; };
+		385918A828518EE400DE90FF /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385918A028518EE400DE90FF /* URL+Ext.swift */; };
+		385918A928518EE400DE90FF /* Collection+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385918A128518EE400DE90FF /* Collection+Ext.swift */; };
+		385918AA28518EE400DE90FF /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385918A228518EE400DE90FF /* Array+Ext.swift */; };
+		385918AB28518EE400DE90FF /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385918A328518EE400DE90FF /* UITextView+Ext.swift */; };
 		40E5439D72EA6E210807E1962A3A2C0C /* Pods-YMExtension_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0F60AA0BFB29B3F1A84FC3C401A1F2 /* Pods-YMExtension_Example-dummy.m */; };
 		4833ADE748AB7C6297645FF5A3A4455E /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B1A974A33CCB85F4B6936C9185768 /* String+Ext.swift */; };
 		4947A27310825E51BD016251D74DF0CB /* YMExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 946CE8FCDF8714D9D99F5C4DC73B419A /* YMExtension-dummy.m */; };
@@ -58,8 +65,15 @@
 		2FCAEBD1ABD807452BEFA5F928D4FE0A /* Pods-YMExtension_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YMExtension_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		30FC4D99DF40629D963DAC42AB1B6646 /* Pods-YMExtension_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-YMExtension_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		385917A0284F2FFE00DE90FF /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Ext.swift"; path = "Sources/UICollectionView+Ext.swift"; sourceTree = "<group>"; };
-		385917A4284F33CB00DE90FF /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
-		385917A6284F4F6700DE90FF /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
+		38591886285045FC00DE90FF /* URLRequest+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "URLRequest+Ext.swift"; path = "Sources/URLRequest+Ext.swift"; sourceTree = "<group>"; };
+		3859189C28518EE300DE90FF /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Ext.swift"; path = "Sources/DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
+		3859189D28518EE300DE90FF /* NotificationCenter+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NotificationCenter+Ext.swift"; path = "Sources/NotificationCenter+Ext.swift"; sourceTree = "<group>"; };
+		3859189E28518EE400DE90FF /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Ext.swift"; path = "Sources/UserDefaults+Ext.swift"; sourceTree = "<group>"; };
+		3859189F28518EE400DE90FF /* Dictionary+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Ext.swift"; path = "Sources/Dictionary+Ext.swift"; sourceTree = "<group>"; };
+		385918A028518EE400DE90FF /* URL+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "URL+Ext.swift"; path = "Sources/URL+Ext.swift"; sourceTree = "<group>"; };
+		385918A128518EE400DE90FF /* Collection+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Collection+Ext.swift"; path = "Sources/Collection+Ext.swift"; sourceTree = "<group>"; };
+		385918A228518EE400DE90FF /* Array+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+Ext.swift"; path = "Sources/Array+Ext.swift"; sourceTree = "<group>"; };
+		385918A328518EE400DE90FF /* UITextView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextView+Ext.swift"; path = "Sources/UITextView+Ext.swift"; sourceTree = "<group>"; };
 		3A2B1A974A33CCB85F4B6936C9185768 /* String+Ext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Ext.swift"; path = "Sources/String+Ext.swift"; sourceTree = "<group>"; };
 		40EEF6A6E75A4D94F4114E0108F74052 /* Pods-YMExtension_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-YMExtension_Tests"; path = Pods_YMExtension_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EBBBD121DE2F29DEF97F9FEFC650F8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -183,9 +197,16 @@
 		6D579539476E5D18D3E20FFB4B5DE34A /* YMExtension */ = {
 			isa = PBXGroup;
 			children = (
+				385918A228518EE400DE90FF /* Array+Ext.swift */,
+				385918A128518EE400DE90FF /* Collection+Ext.swift */,
+				3859189F28518EE400DE90FF /* Dictionary+Ext.swift */,
+				3859189C28518EE300DE90FF /* DispatchQueue+Ext.swift */,
+				3859189D28518EE300DE90FF /* NotificationCenter+Ext.swift */,
+				385918A328518EE400DE90FF /* UITextView+Ext.swift */,
+				385918A028518EE400DE90FF /* URL+Ext.swift */,
+				3859189E28518EE400DE90FF /* UserDefaults+Ext.swift */,
+				38591886285045FC00DE90FF /* URLRequest+Ext.swift */,
 				385917A0284F2FFE00DE90FF /* UICollectionView+Ext.swift */,
-				385917A6284F4F6700DE90FF /* URL+Ext.swift */,
-				385917A4284F33CB00DE90FF /* UITextView+Ext.swift */,
 				CA1A6C4CF0E0D6E69071CDCF28C565F7 /* Bundle+Ext.swift */,
 				5F0279BDAB664A71E0486868F181B06B /* CALayer+Ext.swift */,
 				3A2B1A974A33CCB85F4B6936C9185768 /* String+Ext.swift */,
@@ -401,17 +422,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				84678F0E8029B8E0D46C9A3014E72272 /* Bundle+Ext.swift in Sources */,
-				385917A5284F33CB00DE90FF /* UITextView+Ext.swift in Sources */,
+				385918A728518EE400DE90FF /* Dictionary+Ext.swift in Sources */,
 				93B732B15455D48C321BF1E3A3D465EF /* CALayer+Ext.swift in Sources */,
 				4833ADE748AB7C6297645FF5A3A4455E /* String+Ext.swift in Sources */,
 				0919655A1353581330F693A6661A4E29 /* UIColor+Ext.swift in Sources */,
 				7451AE913DAF3F467FC1BCEAB8E44F12 /* UIImage+Ext.swift in Sources */,
+				385918A828518EE400DE90FF /* URL+Ext.swift in Sources */,
 				385917A1284F2FFE00DE90FF /* UICollectionView+Ext.swift in Sources */,
 				62F506F9B45FF787E3753C5A60CFEBE4 /* UITableView+Ext.swift in Sources */,
+				385918AB28518EE400DE90FF /* UITextView+Ext.swift in Sources */,
 				CCDFD884267C13FDBD45AF5A009B4B6B /* UIView+Ext.swift in Sources */,
+				385918A628518EE400DE90FF /* UserDefaults+Ext.swift in Sources */,
+				385918AA28518EE400DE90FF /* Array+Ext.swift in Sources */,
 				B4EAB64937BAAD729F42339174E0BCFE /* UIWindow+Ext.swift in Sources */,
-				385917A7284F4F6700DE90FF /* URL+Ext.swift in Sources */,
+				385918A528518EE400DE90FF /* NotificationCenter+Ext.swift in Sources */,
+				385918A428518EE400DE90FF /* DispatchQueue+Ext.swift in Sources */,
 				24339B118345B7D26F895B516FE76E02 /* YMExtension.swift in Sources */,
+				385918A928518EE400DE90FF /* Collection+Ext.swift in Sources */,
+				38591887285045FC00DE90FF /* URLRequest+Ext.swift in Sources */,
 				4947A27310825E51BD016251D74DF0CB /* YMExtension-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

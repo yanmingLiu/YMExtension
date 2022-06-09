@@ -8,9 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YMExtension'
-  s.version          = '0.1.10'
+  s.version          = '0.2.0'
   s.summary          = 'YMExtension'
-  s.description      = 'Swift extensions'
+  s.description      = 'iOS swift精简的常用扩展、有不少SwifterSwift中copy过来的'
   s.homepage         = 'https://github.com/yanmingLiu/YMExtension'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lym' => 'lwb374402328@gmail.com' }

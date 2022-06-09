@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.ext.register(cellWithClass: UITableViewCell.self)
         return tableView
     }()
 
@@ -25,8 +26,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        title = "Demo"
 
         view.addSubview(tableView)
         tableView.frame = CGRect(
@@ -44,8 +43,22 @@ class ViewController: UIViewController {
         print(res1)
         print(res2)
 
-        let param2 = res2.ext.queryParameters
-        print(param2)
+        NotificationCenter.default.ext.observeOnce(forName: NotificationName) { notification in
+            let object = notification.object as? [String]
+            let userInfo = notification.userInfo as? [String: Any]
+            print(object)
+            print(userInfo)
+        }
+
+        UserDefaults.standard.ext.set(object: 0.12, forKey: "float")
+        UserDefaults.standard.ext.set(object: "字符串", forKey: "string")
+        let number = UserDefaults.standard.ext.object(Float.self, with: "float") ?? 0
+        let string = UserDefaults.standard.ext.object(String.self, with: "string") ?? ""
+        print("number = \(number), string = \(string)")
+
+        var arr = [1, 2, 3, 4, 5]
+        arr.safeSwap(from: 3, to: 0)
+        print(arr)
     }
 
     private func tableHeaderViewLayout() {
@@ -108,7 +121,7 @@ extension ViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.ext.dequeueReusableCell(withClass: UITableViewCell.self, for: indexPath)
         cell.textLabel?.text = "\(indexPath.row)"
         cell.textLabel?.numberOfLines = 0
 
@@ -117,5 +130,22 @@ extension ViewController: UITableViewDataSource {
         }
         cell.contentView.backgroundColor = UIColor.ext.random
         return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
+        var value = 0
+        let delay = 0.02
+        let debouncedIncrementor = DispatchQueue.main.ext.debounce(delay: delay) {
+            value += 1
+            print("value = \(value)")
+        }
+        for _ in 1 ... 10 {
+            debouncedIncrementor()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            print("防抖动结束 value = \(value)")
+        }
     }
 }
