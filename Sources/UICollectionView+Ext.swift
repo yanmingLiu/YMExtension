@@ -5,7 +5,7 @@
 //  Created by lym on 2022/6/7.
 //
 
-import Foundation
+import UIKit
 
 public extension ExtWrapper where Base: UICollectionView {
     /// SwifterSwift: Dequeue reusable UICollectionViewCell using class name.
