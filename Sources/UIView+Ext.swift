@@ -16,6 +16,15 @@ public func adaptWidth(designWidth: CGFloat = 375.0, _ vale: CGFloat) -> CGFloat
 }
 
 public extension ExtWrapper where Base: UIView {
+    /// 返回视图快照
+    func snapshotImage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
+        defer { UIGraphicsEndImageContext() }
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        base.layer.render(in: context)
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+
     /// 返回视图的控制器对象
     func viewController() -> UIViewController? {
         var view: UIView? = base
@@ -95,6 +104,173 @@ public extension ExtWrapper where Base: UIView {
             if $0.isKind(of: CAGradientLayer.self) {
                 $0.removeFromSuperlayer()
             }
+        }
+    }
+
+    /// 将当前坐标系的点转换到另一个视图或窗口的坐标系
+    ///
+    /// 当参数view为nil的时候，系统会自动帮你转换为当前窗口的基本坐标系（即view参数为整个屏幕，原点为(0,0)，宽高是屏幕的宽高）
+    ///
+    /// 计算公式：
+    ///
+    /// 1.如果`fromView`和`toView`不为`superView`关系
+    ///
+    /// ```
+    /// (fromView.frame.origin - fromView.bounds.origin) + point - (toView.frame.origin - toView.bounds.origin)
+    /// ```
+    ///
+    /// 2.如果'fromView'和'toView'有任何一方为另一方的'superView'，该view不再参与计算。
+    /// ```
+    /// [fromView addSubview:toView]; //即fromView为superView时
+    /// ==> result = point - (toView.frame.origin - toView.bounds.origin)
+    ///
+    /// [toView addSubview:fromView]; //即toView为superView时
+    /// ==> result = (fromView.frame.origin - fromView.bounds.origin) + point
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - point: 当前视图坐标系的点
+    ///   - view: 指定视图或窗口
+    ///   - Returns: 转换坐标系后的点坐标
+    func convertPoint(point: CGPoint, toViewOrWindow view: UIView?) -> CGPoint {
+        guard let view = view else {
+            if base.isKind(of: UIWindow.self) {
+                return (base as! UIWindow).convert(point, to: nil)
+            } else {
+                return base.convert(point, to: nil)
+            }
+        }
+        if let from = base.isKind(of: UIWindow.self) ? (base as! UIWindow) : base.window,
+           let to = view.isKind(of: UIWindow.self) ? (view as! UIWindow) : view.window, from != to
+        {
+            var p = point
+            p = base.convert(p, to: from)
+            p = to.convert(p, to: from)
+            p = view.convert(p, to: to)
+            return p
+        } else {
+            return base.convert(point, to: view)
+        }
+    }
+
+    /// 将一个点从一个指定视图或窗口的坐标系转换到当前视图坐标系
+    ///
+    /// 当参数view为nil的时候，系统会自动帮你转换为当前窗口的基本坐标系（即view参数为整个屏幕，原点为(0,0)，宽高是屏幕的宽高）
+    ///
+    /// 计算公式：
+    ///
+    /// 1.如果`fromView`和`toView`不为`superView`关系
+    ///
+    /// ```
+    /// (fromView.frame.origin - fromView.bounds.origin) + point - (toView.frame.origin - toView.bounds.origin)
+    /// ```
+    ///
+    /// 2.如果'fromView'和'toView'有任何一方为另一方的'superView'，该view不再参与计算。
+    /// ```
+    /// [fromView addSubview:toView]; //即fromView为superView时
+    /// ==> result = point - (toView.frame.origin - toView.bounds.origin)
+    ///
+    /// [toView addSubview:fromView]; //即toView为superView时
+    /// ==> result = (fromView.frame.origin - fromView.bounds.origin) + point
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - point: 当前视图坐标系的点
+    ///   - view: 指定视图或窗口
+    ///   - Returns: 转换坐标系后的点坐标
+    func convertPoint(point: CGPoint, fromViewOrWindow view: UIView?) -> CGPoint {
+        guard let view = view else {
+            if base.isKind(of: UIWindow.self) {
+                return (base as! UIWindow).convert(point, from: nil)
+            } else {
+                return base.convert(point, from: nil)
+            }
+        }
+
+        if let from = view.isKind(of: UIWindow.self) ? (view as! UIWindow) : view.window,
+           let to = base.isKind(of: UIWindow.self) ? (base as! UIWindow) : base.window, from != to
+        {
+            var p = point
+            p = from.convert(p, from: view)
+            p = to.convert(p, from: from)
+            p = base.convert(p, from: to)
+            return p
+        } else {
+            return base.convert(point, from: nil)
+        }
+    }
+
+    /// 将一个矩形区域从当前视图坐标系转换到指定视图或窗口坐标系
+    ///
+    /// 使用方法：
+    /// ```
+    /// CGRect rect = [_button.superview convertRect:_button.frame toViewOrWindow:self.view];
+    /// ```
+    ///
+    /// button的frame是相对于其superview来确定的，frame确定了button在其superview的位置和大小
+    ///
+    /// 一般来说，toView方法中，消息的接收者为被转换的frame所在的控件的superview；fromView方法中，消息的接收者为即将转到的目标view.
+    ///
+    /// - Parameters:
+    ///   - rect: 矩形区域
+    ///   - view: 指定视图或窗口
+    /// - Returns: 目标坐标系的矩形区域
+    func convertRect(rect: CGRect, toViewOrWindow view: UIView?) -> CGRect {
+        guard let view = view else {
+            if base.isKind(of: UIWindow.self) {
+                return (base as! UIWindow).convert(rect, to: nil)
+            } else {
+                return base.convert(rect, to: nil)
+            }
+        }
+
+        if let from = base.isKind(of: UIWindow.self) ? (base as! UIWindow) : base.window,
+           let to = view.isKind(of: UIWindow.self) ? (view as! UIWindow) : view.window, from != to
+        {
+            var r = rect
+            r = base.convert(r, to: from)
+            r = to.convert(rect, to: from)
+            r = view.convert(rect, to: to)
+            return r
+        } else {
+            return base.convert(rect, to: view)
+        }
+    }
+
+    /// 将一个矩形区域从指定视图坐标系转换到当前视图或窗口坐标系
+    ///
+    /// 使用方法：
+    /// ```
+    /// CGRect rect = [self.view convertRect:_button.frame fromViewOrWindow:_button.superview];
+    /// ```
+    ///
+    /// button的frame是相对于其superview来确定的，frame确定了button在其superview的位置和大小
+    ///
+    /// 一般来说，toView方法中，消息的接收者为被转换的frame所在的控件的superview；fromView方法中，消息的接收者为即将转到的目标view.
+    ///
+    /// - Parameters:
+    ///   - rect: 矩形区域
+    ///   - view: 指定视图或窗口
+    /// - Returns: 当前坐标系的矩形区域
+    func convertRect(rect: CGRect, fromViewOrWindow view: UIView?) -> CGRect {
+        guard let view = view else {
+            if base.isKind(of: UIWindow.self) {
+                return (base as! UIWindow).convert(rect, from: nil)
+            } else {
+                return base.convert(rect, from: nil)
+            }
+        }
+
+        if let from = view.isKind(of: UIWindow.self) ? (view as! UIWindow) : view.window,
+           let to = base.isKind(of: UIWindow.self) ? (base as! UIWindow) : base.window, from != to
+        {
+            var r = rect
+            r = from.convert(r, from: view)
+            r = to.convert(r, from: from)
+            r = base.convert(r, from: to)
+            return r
+        } else {
+            return base.convert(rect, from: view)
         }
     }
 }
