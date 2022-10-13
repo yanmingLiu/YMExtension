@@ -10,6 +10,7 @@
 		3828A2C927B26348001020AB /* UIListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828A2C827B26348001020AB /* UIListController.swift */; };
 		385917AB284F591200DE90FF /* URLExtTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385917AA284F591200DE90FF /* URLExtTest.swift */; };
 		3870ECEC2848C0ED0022E5A3 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870ECEB2848C0ED0022E5A3 /* TableController.swift */; };
+		38F2E88F28F7E3BA00E42769 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2E88E28F7E3BA00E42769 /* TextViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		3828A2C827B26348001020AB /* UIListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIListController.swift; sourceTree = "<group>"; };
 		385917AA284F591200DE90FF /* URLExtTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtTest.swift; sourceTree = "<group>"; };
 		3870ECEB2848C0ED0022E5A3 /* TableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
+		38F2E88E28F7E3BA00E42769 /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		46BD0CC3F0102808B5A4C487 /* Pods-YMExtension_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YMExtension_Tests.release.xcconfig"; path = "Target Support Files/Pods-YMExtension_Tests/Pods-YMExtension_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* YMExtension_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YMExtension_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				3828A2C827B26348001020AB /* UIListController.swift */,
 				3870ECEB2848C0ED0022E5A3 /* TableController.swift */,
+				38F2E88E28F7E3BA00E42769 /* TextViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -342,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F2E88F28F7E3BA00E42769 /* TextViewController.swift in Sources */,
 				3870ECEC2848C0ED0022E5A3 /* TableController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

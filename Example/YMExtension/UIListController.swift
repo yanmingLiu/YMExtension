@@ -9,15 +9,23 @@
 import UIKit
 import YMExtension
 
-let NotificationName = NSNotification.Name("1")
+enum appNotiName: String {
+    case onceNotificationDemo
+}
+
+extension Notification.Name  {
+    static let onceNotificationDemo = NSNotification.Name(appNotiName.onceNotificationDemo.rawValue)
+}
 
 class UIListController: UITableViewController {
-    let datas = ["渐变色按钮"]
-    let vcs: [UIViewController] = [TableController()]
+    let datas = ["渐变色按钮",
+                 "输入框防抖"]
+    let vcs: [String] = ["TableController", "TextViewController"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = UIColor.white
         tableView.ext.register(cellWithClass: UITableViewCell.self)
     }
 
@@ -37,9 +45,12 @@ class UIListController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(vcs[indexPath.row], animated: true)
-        if indexPath.row == 0 {
-            NotificationCenter.default.post(name: NotificationName, object: ["1","2","3"], userInfo: ["k": "v"])
+        let vcName = vcs[indexPath.row]
+        guard let vcClass = vcName.ext.toClass() as? UIViewController.Type else {
+            return
         }
+        let vc = vcClass.init()
+        navigationController?.pushViewController(vc, animated: true)
+        NotificationCenter.default.post(name: .onceNotificationDemo, object: ["1","2","3"], userInfo: ["k": "v"])
     }
 }

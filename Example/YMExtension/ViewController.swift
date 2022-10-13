@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         print(res1)
         print(res2)
 
-        NotificationCenter.default.ext.observeOnce(forName: NotificationName) { notification in
+        NotificationCenter.default.ext.observeOnce(forName: .onceNotificationDemo) { notification in
             let object = notification.object as? [String]
             let userInfo = notification.userInfo as? [String: Any]
             print(object)
