@@ -12,12 +12,12 @@ extension UIColor: ExtCompatible {}
 
 public extension ExtWrapper where Base: UIColor {
     /// 随机颜色
-    static var random: UIColor {
-        let red = CGFloat(Float.random(in: 0 ..< 255.0) / 255.0)
-        let green = CGFloat(Float.random(in: 0 ..< 255.0) / 255.0)
-        let blue = CGFloat(Float.random(in: 0 ..< 255.0) / 255.0)
-        return UIColor(red: red, green: green, blue: blue, alpha: 0.5)
-    }
+    static func random(alpha: CGFloat = 0.5) -> UIColor {
+         let r = CGFloat.random(in: 0...1)
+         let g = CGFloat.random(in: 0...1)
+         let b = CGFloat.random(in: 0...1)
+         return UIColor(red: r, green: g, blue: b, alpha: alpha)
+     }
 
     /// 根据16进制颜色值返回颜色
     /// - Parameters:

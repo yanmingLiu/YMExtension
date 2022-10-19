@@ -63,7 +63,7 @@ class ViewController: UIViewController {
 
     private func tableHeaderViewLayout() {
         let view = UIView()
-        view.backgroundColor = UIColor.ext.random
+        view.backgroundColor = UIColor.ext.random()
 
         let label = UILabel()
         label.numberOfLines = 0
@@ -95,10 +95,12 @@ class ViewController: UIViewController {
     }
 
     private func extText() -> String? {
+
         """
         常用扩展：
         Bundle.ext.appBundleName = \(Bundle.ext.appBundleName)
         Bundle.ext.appVersion = \(Bundle.ext.appVersion)
+        UIDevice.ext.isIphoneX = \(UIDevice.ext.isIphoneX)
 
         UIWindow.ext.key = \(String(describing: UIWindow.ext.key))
         UIWindow.ext.safeAreaInsets = \(UIWindow.ext.safeAreaInsets)
@@ -110,7 +112,7 @@ class ViewController: UIViewController {
         UIWindow.ext.tabBarHeight = \(UIWindow.ext.tabBarHeight)
         UIWindow.ext.tabBarSafeAreaHeight = \(UIWindow.ext.tabBarSafeAreaHeight)
 
-        随机6位数的字符串String.ext.randomString(6)) = \(String.ext.random(ofLength: 6)))
+        随机6位数的字符串String.ext.randomString(6)) = \(String.ext.random(ofLength: 6))
         """
     }
 }
@@ -128,7 +130,7 @@ extension ViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             cell.textLabel?.text = extText()
         }
-        cell.contentView.backgroundColor = UIColor.ext.random
+        cell.contentView.backgroundColor = UIColor.ext.random()
         return cell
     }
 }

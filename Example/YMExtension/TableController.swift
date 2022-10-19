@@ -9,8 +9,12 @@ import Foundation
 import UIKit
 import YMExtension
 
-let colors = [UIColor.ext.hex("#FF8175"),
-              UIColor.ext.hex("#FF271A")]
+let firstColor = UIColor(red: 0/255.0, green: 185/255.0, blue: 172/255.0, alpha: 1)
+let secondColor = UIColor(red: 86/255.0, green: 126/255.0, blue: 177/255.0, alpha: 1)
+let colors0 = [firstColor, secondColor]
+
+let colors = [UIColor.ext.hex("#7B47FF"),
+              UIColor.ext.hex("#8D68F2")]
 
 class TableController: UITableViewController {
     override func viewDidLoad() {
@@ -41,8 +45,6 @@ class TableCell: UITableViewCell {
     let actionButton = UIButton()
     let leftLabel = UILabel()
 
-    private var gradientLayer: CAGradientLayer?
-
     private var labelGradientLayer: CAGradientLayer?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -62,24 +64,23 @@ class TableCell: UITableViewCell {
         actionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         actionButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         actionButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+        actionButton.layer.cornerRadius = 4
+        actionButton.clipsToBounds = true
 
         contentView.addSubview(leftLabel)
         leftLabel.translatesAutoresizingMaskIntoConstraints = false
-        leftLabel.trailingAnchor.constraint(equalTo: actionButton.leadingAnchor, constant: -20).isActive = true
+        leftLabel.trailingAnchor.constraint(lessThanOrEqualTo: actionButton.leadingAnchor, constant: -20).isActive = true
         leftLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         leftLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
         leftLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        leftLabel.layer.cornerRadius = 8
+
+        let image = UIImage.ext.gradientColorImage(colors: colors0)
+        actionButton.setBackgroundImage(image, for: .normal)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        actionButton.layer.cornerRadius = actionButton.frame.height / 2
-        if gradientLayer?.frame != bounds {
-            gradientLayer?.frame = bounds
-            gradientLayer = actionButton.ext.addGradientColor(startPoint: CGPoint(x: 0, y: 0.5), endPoint: CGPoint(x: 1, y: 0.5), colors: colors)
-        }
-
-        leftLabel.layer.cornerRadius = 8
 
         if labelGradientLayer?.frame != bounds {
             labelGradientLayer?.frame = bounds

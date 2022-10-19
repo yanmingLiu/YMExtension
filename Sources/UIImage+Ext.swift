@@ -12,18 +12,18 @@ extension UIImage: ExtCompatible {}
 public extension ExtWrapper where Base: UIImage {
     /// 根据渐变颜色生成渐变图片
     static func gradientColorImage(
-        bounds: CGRect,
         colors: [UIColor],
-        startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
-        endPoint: CGPoint = CGPoint(x: 1.0, y: 0.5),
-        locations _: [NSNumber]? = [0, 1]
+        startPoint: CGPoint = CGPoint(x: 0, y: 0),
+        endPoint: CGPoint = CGPoint(x: 1.0, y: 0),
+        bounds: CGRect = CGRect(x: 0, y: 0, width: 2, height: 2),
+        locations: [NSNumber]? = [0, 1]
     ) -> UIImage? {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
-        gradientLayer.locations = [0, 1]
+        gradientLayer.locations = locations
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()

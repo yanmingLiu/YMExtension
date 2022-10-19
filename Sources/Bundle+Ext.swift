@@ -12,32 +12,32 @@ extension Bundle: ExtCompatible {}
 
 public extension ExtWrapper where Base: Bundle {
     /// App命名空间
-    static var namespace: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleExecutable") as? String
+    static var namespace: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleExecutable") as? String ?? ""
     }
 
     /// App 名称
-    static var appDisplayName: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+    static var appDisplayName: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? ""
     }
 
     /// 应用名称
-    static var appBundleName: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
+    static var appBundleName: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
     }
 
     /// 应用ID
-    static var appBundleID: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
+    static var appBundleID: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String ?? ""
     }
 
     /// 应用版本号
-    static var appVersion: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    static var appVersion: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     }
 
     /// 应用构建版本号
-    static var appBuildVersion: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+    static var appBuildVersion: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
     }
 }
