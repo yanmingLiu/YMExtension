@@ -20,6 +20,8 @@ class ViewController: UIViewController {
 
     var headerView: UIView!
 
+    var datas = [String]()
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
