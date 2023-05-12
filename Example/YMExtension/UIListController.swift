@@ -20,11 +20,14 @@ extension Notification.Name  {
 class UIListController: UITableViewController {
     let datas = ["渐变色按钮",
                  "输入框防抖",
-                 "DynamicTableHeaderView"
+                 "DynamicTableHeaderView",
+                 "二维码图片",
     ]
     let vcs: [String] = ["TableController",
                          "TextViewController",
-                         "TableViewController"]
+                         "TableViewController",
+                         "QRController",
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()

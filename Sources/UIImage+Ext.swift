@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreImage
 
 extension UIImage: ExtCompatible {}
 
@@ -182,5 +183,50 @@ public extension ExtWrapper where Base: UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+}
+
+
+@available(iOS 10.0, *)
+public extension ExtWrapper where Base: UIImage {
+
+    static func generateQRCode(qrString: String, centerText: String?, size: CGFloat) -> UIImage? {
+        let data = qrString.data(using: .utf8)
+
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+        qrFilter.setValue(data, forKey: "inputMessage")
+        qrFilter.setValue("H", forKey: "inputCorrectionLevel")
+
+        guard let qrImage = qrFilter.outputImage else { return nil }
+        let scaleX = size / qrImage.extent.size.width
+        let scaleY = size / qrImage.extent.size.height
+        let transformedImage = qrImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+
+        let render = UIGraphicsImageRenderer(size: CGSize(width: size, height: size))
+        let image = render.image { context in
+            UIImage(ciImage: transformedImage).draw(in: CGRect(origin: .zero, size: CGSize(width: size, height: size)))
+
+            if let centerText = centerText {
+                let font = UIFont.boldSystemFont(ofSize: 20)
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .center
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .font: font,
+                    .foregroundColor: UIColor.black,
+                    .paragraphStyle: paragraphStyle
+                ]
+                let textSize = centerText.size(withAttributes: attributes)
+                let textRect = CGRect(x: (size - textSize.width) / 2, y: (size - textSize.height) / 2, width: textSize.width, height: textSize.height)
+
+                // 将中心区域挖空
+                UIColor.white.setFill()
+                context.fill(textRect)
+
+                // 绘制中心文本
+                centerText.draw(in: textRect, withAttributes: attributes)
+            }
+        }
+
+        return image
     }
 }
